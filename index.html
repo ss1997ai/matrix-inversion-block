@@ -5,23 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>信号与系统 - 交互式学习平台</title>
     <link rel="stylesheet" href="css/styles.css">
-    <!-- Chart.js for visualizations -->
+    <!-- Fallback chart library (loads first, only activates if Chart.js unavailable) -->
+    <script src="js/simple-chart.js"></script>
+    <!-- Chart.js for visualizations (preferred, loads from CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <!-- Math.js for mathematical computations (optional) -->
     <script src="https://cdn.jsdelivr.net/npm/mathjs@12.0.0/lib/browser/math.min.js"></script>
-    <script>
-        // Fallback check for Chart.js
-        window.addEventListener('DOMContentLoaded', function() {
-            if (typeof Chart === 'undefined') {
-                console.warn('Chart.js not loaded. Please ensure internet connection or disable ad blockers.');
-                // Create a simple notice
-                const notice = document.createElement('div');
-                notice.style.cssText = 'position: fixed; top: 10px; left: 50%; transform: translateX(-50%); background: #ff9800; color: white; padding: 15px 30px; border-radius: 5px; z-index: 10000; box-shadow: 0 2px 10px rgba(0,0,0,0.3);';
-                notice.innerHTML = '⚠️ 请启用 CDN 访问或禁用广告拦截器以查看完整的可视化功能<br><small>Please enable CDN access or disable ad blockers for full visualization features</small>';
-                document.body.appendChild(notice);
-            }
-        });
-    </script>
 </head>
 <body>
     <header>

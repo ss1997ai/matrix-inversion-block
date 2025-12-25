@@ -7,10 +7,6 @@ let samplingParams = {
 };
 
 function initSampling() {
-    if (typeof Chart === 'undefined') {
-        console.error('Chart.js is not loaded');
-        return;
-    }
     if (!samplingChart) {
         const ctx1 = document.getElementById('sampling-chart');
         if (ctx1) {

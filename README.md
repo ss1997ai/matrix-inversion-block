@@ -53,8 +53,8 @@ An interactive web application similar to MATLAB Signal Processing Toolbox for l
 
 ## 使用方法 / Usage
 
-1. 直接在浏览器中打开 `index.html` 文件
-   Open `index.html` directly in a web browser
+1. 直接在浏览器中打开 `index.html` 文件即可使用
+   Simply open `index.html` directly in a web browser
 
 2. 或使用本地服务器（推荐）：
    Or use a local server (recommended):
@@ -68,6 +68,12 @@ An interactive web application similar to MATLAB Signal Processing Toolbox for l
 
 3. 在浏览器中访问 `http://localhost:8000`
    Access `http://localhost:8000` in your browser
+
+**注意 / Note:** 
+- 应用现在包含内置的图表库，无需互联网连接即可完全离线使用
+- The application now includes a built-in chart library and works completely offline without internet access
+- 如果 Chart.js CDN 可用，将优先使用 Chart.js 以获得更好的性能
+- If Chart.js CDN is available, it will be used for better performance
 
 ## 项目结构 / Project Structure
 
@@ -104,18 +110,15 @@ This platform is particularly suitable for:
 - Safari
 - Edge
 
-需要支持 ES6+ 和 Canvas API
-Requires ES6+ and Canvas API support
+需要支持 ES6+ 和 Canvas API。应用包含内置图表库，可完全离线使用。
+Requires ES6+ and Canvas API support. Includes built-in chart library for complete offline functionality.
 
 ## 未来改进 / Future Improvements
 
-- [ ] 添加更多信号类型 / Add more signal types
-- [ ] 实现音频信号处理 / Implement audio signal processing
-- [ ] 添加实时麦克风输入 / Add real-time microphone input
-- [ ] 支持信号导出 / Support signal export
-- [ ] 添加更多滤波器类型 / Add more filter types
-- [ ] 实现2D信号处理（图像） / Implement 2D signal processing (images)
-- [ ] 添加练习题和测验 / Add exercises and quizzes
+- [x] ~~添加本地 Chart.js 库以支持完全离线使用~~ (已完成 / Completed)
+- [ ] 添加信号导出功能（CSV/JSON）/ Add signal export (CSV/JSON)
+- [ ] 添加更多预设示例 / Add more preset examples
+- [ ] 添加帮助文档和教程视频 / Add help docs and tutorial videos
 
 ## 贡献 / Contributing
 

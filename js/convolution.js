@@ -4,10 +4,6 @@ let convSystemChart = null;
 let convOutputChart = null;
 
 function initConvolution() {
-    if (typeof Chart === 'undefined') {
-        console.error('Chart.js is not loaded');
-        return;
-    }
     if (!convInputChart) {
         // Input Signal Chart
         const ctx1 = document.getElementById('conv-input-chart');

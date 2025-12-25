@@ -7,11 +7,12 @@
 1. 在浏览器中直接打开 `index.html` 文件
    Open the `index.html` file directly in a web browser
 
-2. **重要**: 确保浏览器可以访问 CDN 资源
-   **Important**: Ensure your browser can access CDN resources
-   - 禁用广告拦截器 / Disable ad blockers
-   - 允许访问 cdn.jsdelivr.net
-   - 或使用无隐私模式的浏览器
+2. **无需互联网连接** - 应用现在完全离线可用
+   **No internet required** - Application now works completely offline
+   - 内置图表库，无需外部依赖
+   - Built-in chart library, no external dependencies needed
+   - 如果有网络，会尝试加载 Chart.js 以获得更好性能
+   - Will attempt to load Chart.js if online for better performance
 
 ### 方法二：使用本地服务器 / Method 2: Local Server
 
@@ -165,24 +166,22 @@ Analyze discrete-time systems:
 ## 常见问题 / FAQ
 
 ### Q: 为什么看不到图表？
-**A:** 可能是 CDN 被阻止。请：
-- 检查网络连接
-- 禁用广告拦截器
+**A:** 请刷新页面。应用现在包含内置图表库，应该可以正常显示。如果仍有问题：
+- 检查浏览器控制台是否有错误
+- 确保浏览器支持 Canvas API
 - 尝试使用其他浏览器
-- 查看浏览器控制台是否有错误
 
 ### Q: Why can't I see the charts?
-**A:** CDN might be blocked. Please:
-- Check your internet connection
-- Disable ad blockers
-- Try a different browser
+**A:** Please refresh the page. The application now includes a built-in chart library and should display correctly. If issues persist:
 - Check browser console for errors
+- Ensure browser supports Canvas API
+- Try a different browser
 
 ### Q: 可以离线使用吗？
-**A:** 需要下载 Chart.js 和 Math.js 库到本地 `lib/` 文件夹，并修改 HTML 中的引用路径。
+**A:** 是的！应用现在完全支持离线使用，无需下载额外的库文件。
 
 ### Q: Can I use it offline?
-**A:** You need to download Chart.js and Math.js libraries to a local `lib/` folder and modify the references in the HTML.
+**A:** Yes! The application now fully supports offline use without downloading additional library files.
 
 ### Q: 支持移动设备吗？
 **A:** 支持，但建议使用平板或电脑以获得更好的体验。
