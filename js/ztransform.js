@@ -8,6 +8,10 @@ let zTransformParams = {
 };
 
 function initZtransform() {
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js is not loaded');
+        return;
+    }
     if (!poleZeroChart) {
         const ctx1 = document.getElementById('pole-zero-chart');
         if (ctx1) {

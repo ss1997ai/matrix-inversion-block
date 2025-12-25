@@ -9,6 +9,10 @@ let filterParams = {
 };
 
 function initFilters() {
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js is not loaded');
+        return;
+    }
     if (!magnitudeChart) {
         const ctx1 = document.getElementById('magnitude-response-chart');
         if (ctx1) {

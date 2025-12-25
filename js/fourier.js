@@ -8,6 +8,10 @@ let fourierParams = {
 };
 
 function initFourier() {
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js is not loaded');
+        return;
+    }
     if (!timeDomainChart) {
         const ctx1 = document.getElementById('time-domain-chart');
         if (ctx1) {

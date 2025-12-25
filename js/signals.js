@@ -8,6 +8,10 @@ let signalParams = {
 };
 
 function initSignals() {
+    if (typeof Chart === 'undefined') {
+        console.error('Chart.js is not loaded');
+        return;
+    }
     if (!signalChart) {
         const ctx = document.getElementById('signal-chart');
         if (ctx) {
