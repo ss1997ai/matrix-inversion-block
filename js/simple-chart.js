@@ -21,6 +21,29 @@ class SimpleChart {
         this.draw();
     }
     
+    // Helper function to add alpha to any color format
+    addAlpha(color, alpha) {
+        // If already has alpha, return as is
+        if (color.includes('rgba')) return color;
+        
+        // Handle rgb format
+        if (color.startsWith('rgb(')) {
+            return color.replace('rgb', 'rgba').replace(')', `, ${alpha})`);
+        }
+        
+        // Handle hex format
+        if (color.startsWith('#')) {
+            const hex = color.slice(1);
+            const r = parseInt(hex.slice(0, 2), 16);
+            const g = parseInt(hex.slice(2, 4), 16);
+            const b = parseInt(hex.slice(4, 6), 16);
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
+        
+        // Default: return color with default rgba wrapper
+        return `rgba(102, 126, 234, ${alpha})`;
+    }
+    
     draw() {
         const ctx = this.ctx;
         const width = this.canvas.width;
@@ -126,7 +149,8 @@ class SimpleChart {
             
             if (this.type === 'bar' || dataset.type === 'bar') {
                 // Draw bars
-                ctx.fillStyle = color.replace('rgb', 'rgba').replace(')', ', 0.6)');
+                const color = dataset.backgroundColor || dataset.borderColor || '#667eea';
+                ctx.fillStyle = this.addAlpha(color, 0.6);
                 const barWidth = plotWidth / data.length * 0.8;
                 
                 data.forEach((value, i) => {
@@ -173,7 +197,8 @@ class SimpleChart {
                 
                 // Fill area if specified
                 if (dataset.fill) {
-                    ctx.fillStyle = color.replace('rgb', 'rgba').replace(')', ', 0.2)');
+                    const fillColor = dataset.backgroundColor || dataset.borderColor || '#667eea';
+                    ctx.fillStyle = this.addAlpha(fillColor, 0.2);
                     ctx.lineTo(width - margin.right, height - margin.bottom);
                     ctx.lineTo(margin.left, height - margin.bottom);
                     ctx.closePath();
