@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信号与系统 - 交互式学习平台</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@12.0.0/lib/browser/math.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>信号与系统 - 交互式学习平台</h1>
+            <p class="subtitle">Signals and Systems - Interactive Learning Platform</p>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <div class="container">
+            <ul class="nav-menu">
+                <li><a href="#" data-page="home" class="active">首页</a></li>
+                <li><a href="#" data-page="signals">信号基础</a></li>
+                <li><a href="#" data-page="convolution">卷积</a></li>
+                <li><a href="#" data-page="fourier">傅里叶分析</a></li>
+                <li><a href="#" data-page="filters">滤波器设计</a></li>
+                <li><a href="#" data-page="sampling">采样理论</a></li>
+                <li><a href="#" data-page="ztransform">Z变换</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home-page" class="page active">
+            <div class="welcome-section">
+                <h2>欢迎来到信号与系统交互式学习平台</h2>
+                <p>本平台提供类似 MATLAB 信号处理工具箱的功能，帮助工程师和学生直观地理解信号与系统的核心概念。</p>
+                
+                <div class="chapters-grid">
+                    <div class="chapter-card" data-chapter="signals">
+                        <h3>第一章：信号基础</h3>
+                        <p>学习连续时间和离散时间信号的基本概念</p>
+                        <ul>
+                            <li>正弦信号</li>
+                            <li>方波信号</li>
+                            <li>锯齿波</li>
+                            <li>脉冲信号</li>
+                        </ul>
+                        <button class="btn-primary" onclick="navigateTo('signals')">开始学习</button>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="convolution">
+                        <h3>第二章：卷积运算</h3>
+                        <p>可视化理解卷积的物理意义</p>
+                        <ul>
+                            <li>连续卷积</li>
+                            <li>离散卷积</li>
+                            <li>卷积性质</li>
+                            <li>系统响应</li>
+                        </ul>
+                        <button class="btn-primary" onclick="navigateTo('convolution')">开始学习</button>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="fourier">
+                        <h3>第三章：傅里叶分析</h3>
+                        <p>频域分析和频谱可视化</p>
+                        <ul>
+                            <li>傅里叶级数</li>
+                            <li>傅里叶变换</li>
+                            <li>DFT/FFT</li>
+                            <li>频谱分析</li>
+                        </ul>
+                        <button class="btn-primary" onclick="navigateTo('fourier')">开始学习</button>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="filters">
+                        <h3>第四章：滤波器设计</h3>
+                        <p>设计和分析各类数字滤波器</p>
+                        <ul>
+                            <li>低通滤波器</li>
+                            <li>高通滤波器</li>
+                            <li>带通滤波器</li>
+                            <li>带阻滤波器</li>
+                        </ul>
+                        <button class="btn-primary" onclick="navigateTo('filters')">开始学习</button>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="sampling">
+                        <h3>第五章：采样理论</h3>
+                        <p>理解采样定理和混叠现象</p>
+                        <ul>
+                            <li>采样定理</li>
+                            <li>混叠效应</li>
+                            <li>重建滤波</li>
+                            <li>量化误差</li>
+                        </ul>
+                        <button class="btn-primary" onclick="navigateTo('sampling')">开始学习</button>
+                    </div>
+
+                    <div class="chapter-card" data-chapter="ztransform">
+                        <h3>第六章：Z变换</h3>
+                        <p>Z变换和系统分析</p>
+                        <ul>
+                            <li>Z变换定义</li>
+                            <li>收敛域</li>
+                            <li>零极点图</li>
+                            <li>系统稳定性</li>
+                        </ul>
+                        <button class="btn-primary" onclick="navigateTo('ztransform')">开始学习</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Signals Page -->
+        <section id="signals-page" class="page">
+            <h2>第一章：信号基础</h2>
+            <p>生成和可视化各种基本信号</p>
+            
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="signal-type">信号类型:</label>
+                    <select id="signal-type" onchange="generateSignal()">
+                        <option value="sine">正弦波 (Sine)</option>
+                        <option value="cosine">余弦波 (Cosine)</option>
+                        <option value="square">方波 (Square)</option>
+                        <option value="sawtooth">锯齿波 (Sawtooth)</option>
+                        <option value="triangle">三角波 (Triangle)</option>
+                        <option value="pulse">脉冲 (Pulse)</option>
+                        <option value="exponential">指数 (Exponential)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="frequency">频率 (Hz): <span id="freq-value">1</span></label>
+                    <input type="range" id="frequency" min="0.1" max="10" step="0.1" value="1" oninput="updateFrequency(this.value)">
+                </div>
+
+                <div class="control-group">
+                    <label for="amplitude">幅度: <span id="amp-value">1</span></label>
+                    <input type="range" id="amplitude" min="0.1" max="5" step="0.1" value="1" oninput="updateAmplitude(this.value)">
+                </div>
+
+                <div class="control-group">
+                    <label for="phase">相位 (度): <span id="phase-value">0</span></label>
+                    <input type="range" id="phase" min="0" max="360" step="1" value="0" oninput="updatePhase(this.value)">
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="signal-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- Convolution Page -->
+        <section id="convolution-page" class="page">
+            <h2>第二章：卷积运算</h2>
+            <p>可视化卷积过程和结果</p>
+
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="input-signal">输入信号:</label>
+                    <select id="input-signal" onchange="updateConvolution()">
+                        <option value="pulse">单位脉冲</option>
+                        <option value="step">单位阶跃</option>
+                        <option value="rect">矩形脉冲</option>
+                        <option value="exponential">指数信号</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="system-response">系统响应:</label>
+                    <select id="system-response" onchange="updateConvolution()">
+                        <option value="pulse">单位脉冲</option>
+                        <option value="step">单位阶跃</option>
+                        <option value="rect">矩形脉冲</option>
+                        <option value="exponential">指数衰减</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="conv-input-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="conv-system-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="conv-output-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- Fourier Analysis Page -->
+        <section id="fourier-page" class="page">
+            <h2>第三章：傅里叶分析</h2>
+            <p>时域和频域分析</p>
+
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="fourier-signal">信号选择:</label>
+                    <select id="fourier-signal" onchange="updateFourier()">
+                        <option value="sine">正弦波</option>
+                        <option value="square">方波</option>
+                        <option value="sawtooth">锯齿波</option>
+                        <option value="composite">复合信号</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="fourier-freq">基频 (Hz): <span id="fourier-freq-value">2</span></label>
+                    <input type="range" id="fourier-freq" min="1" max="10" step="1" value="2" oninput="updateFourierFreq(this.value)">
+                </div>
+
+                <div class="control-group">
+                    <label for="harmonics">谐波数: <span id="harmonics-value">5</span></label>
+                    <input type="range" id="harmonics" min="1" max="20" step="1" value="5" oninput="updateHarmonics(this.value)">
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="time-domain-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="freq-domain-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- Filters Page -->
+        <section id="filters-page" class="page">
+            <h2>第四章：数字滤波器设计</h2>
+            <p>设计和分析数字滤波器</p>
+
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="filter-type">滤波器类型:</label>
+                    <select id="filter-type" onchange="updateFilter()">
+                        <option value="lowpass">低通滤波器 (Low-pass)</option>
+                        <option value="highpass">高通滤波器 (High-pass)</option>
+                        <option value="bandpass">带通滤波器 (Band-pass)</option>
+                        <option value="bandstop">带阻滤波器 (Band-stop)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="cutoff-freq">截止频率 (Hz): <span id="cutoff-value">0.25</span></label>
+                    <input type="range" id="cutoff-freq" min="0.05" max="0.5" step="0.01" value="0.25" oninput="updateCutoff(this.value)">
+                </div>
+
+                <div class="control-group">
+                    <label for="filter-order">滤波器阶数: <span id="order-value">4</span></label>
+                    <input type="range" id="filter-order" min="2" max="10" step="1" value="4" oninput="updateOrder(this.value)">
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="magnitude-response-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="phase-response-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="filter-demo-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- Sampling Page -->
+        <section id="sampling-page" class="page">
+            <h2>第五章：采样理论</h2>
+            <p>理解采样定理和混叠现象</p>
+
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="original-freq">原始信号频率 (Hz): <span id="orig-freq-value">5</span></label>
+                    <input type="range" id="original-freq" min="1" max="20" step="1" value="5" oninput="updateOriginalFreq(this.value)">
+                </div>
+
+                <div class="control-group">
+                    <label for="sampling-rate">采样率 (Hz): <span id="sampling-rate-value">20</span></label>
+                    <input type="range" id="sampling-rate" min="2" max="100" step="1" value="20" oninput="updateSamplingRate(this.value)">
+                </div>
+
+                <div class="info-box" id="nyquist-info">
+                    <strong>Nyquist频率:</strong> <span id="nyquist-freq">10 Hz</span><br>
+                    <strong>状态:</strong> <span id="sampling-status">满足采样定理</span>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="sampling-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="reconstructed-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- Z-Transform Page -->
+        <section id="ztransform-page" class="page">
+            <h2>第六章：Z变换</h2>
+            <p>Z变换和零极点分析</p>
+
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="system-type">系统类型:</label>
+                    <select id="system-type" onchange="updateZTransform()">
+                        <option value="lowpass">低通系统</option>
+                        <option value="highpass">高通系统</option>
+                        <option value="bandpass">带通系统</option>
+                        <option value="custom">自定义</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="pole-radius">极点半径: <span id="pole-radius-value">0.8</span></label>
+                    <input type="range" id="pole-radius" min="0.1" max="0.99" step="0.01" value="0.8" oninput="updatePoleRadius(this.value)">
+                </div>
+
+                <div class="control-group">
+                    <label for="pole-angle">极点角度 (度): <span id="pole-angle-value">45</span></label>
+                    <input type="range" id="pole-angle" min="0" max="180" step="1" value="45" oninput="updatePoleAngle(this.value)">
+                </div>
+
+                <div class="info-box" id="stability-info">
+                    <strong>系统稳定性:</strong> <span id="stability-status">稳定</span>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="pole-zero-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="impulse-response-chart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 信号与系统交互式学习平台 | Signal Processing Educational Tool</p>
+            <p>基于 Chart.js 和 Math.js 构建</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/signals.js"></script>
+    <script src="js/convolution.js"></script>
+    <script src="js/fourier.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/sampling.js"></script>
+    <script src="js/ztransform.js"></script>
+</body>
+</html>
