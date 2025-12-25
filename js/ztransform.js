@@ -1,4 +1,5 @@
 // Z-Transform Module
+// Implements pole-zero analysis and system stability visualization
 let poleZeroChart = null;
 let impulseResponseChart = null;
 let zTransformParams = {
@@ -20,7 +21,7 @@ function initZtransform() {
                 data: {
                     datasets: [
                         {
-                            label: '单位圆',
+                            label: '单位圆', // Unit circle
                             data: [],
                             borderColor: 'rgba(0, 0, 0, 0.3)',
                             backgroundColor: 'transparent',
@@ -30,7 +31,7 @@ function initZtransform() {
                             borderDash: [5, 5]
                         },
                         {
-                            label: '零点',
+                            label: '零点', // Zeros
                             data: [],
                             borderColor: 'rgb(75, 192, 192)',
                             backgroundColor: 'rgb(75, 192, 192)',
@@ -39,7 +40,7 @@ function initZtransform() {
                             showLine: false
                         },
                         {
-                            label: '极点',
+                            label: '极点', // Poles
                             data: [],
                             borderColor: 'rgb(255, 99, 132)',
                             backgroundColor: 'rgb(255, 99, 132)',

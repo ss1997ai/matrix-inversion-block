@@ -252,8 +252,9 @@ function updateCutoff(value) {
 }
 
 function updateOrder(value) {
-    filterParams.order = parseInt(value);
-    document.getElementById('order-value').textContent = value;
+    const orderValue = Math.max(2, Math.floor(parseFloat(value)));
+    filterParams.order = orderValue;
+    document.getElementById('order-value').textContent = orderValue;
     updateFilter();
 }
 

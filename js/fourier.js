@@ -177,14 +177,15 @@ function updateFourier() {
 }
 
 function updateFourierFreq(value) {
-    fourierParams.frequency = parseInt(value);
+    fourierParams.frequency = parseFloat(value);
     document.getElementById('fourier-freq-value').textContent = value;
     updateFourier();
 }
 
 function updateHarmonics(value) {
-    fourierParams.harmonics = parseInt(value);
-    document.getElementById('harmonics-value').textContent = value;
+    const harmonicsValue = Math.max(1, Math.floor(parseFloat(value)));
+    fourierParams.harmonics = harmonicsValue;
+    document.getElementById('harmonics-value').textContent = harmonicsValue;
     updateFourier();
 }
 

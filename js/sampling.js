@@ -192,13 +192,13 @@ function updateSampling() {
 }
 
 function updateOriginalFreq(value) {
-    samplingParams.originalFreq = parseInt(value);
+    samplingParams.originalFreq = parseFloat(value);
     document.getElementById('orig-freq-value').textContent = value;
     updateSampling();
 }
 
 function updateSamplingRate(value) {
-    samplingParams.samplingRate = parseInt(value);
+    samplingParams.samplingRate = parseFloat(value);
     document.getElementById('sampling-rate-value').textContent = value;
     updateSampling();
 }
